@@ -1,20 +1,17 @@
-**背景**
+**Background**
 
-万事开头难。之前写图像识别的博客教程，也是为了方便那些学了很多理论知识，却对实际项目无从下手的小伙伴，后来转到目标检测来了，师从烨兄、亚光兄，从他们那学了不少检测的知识和操作，今天也终于闲下了，准备写个检测系列的总结。一方面分享知识希望可以一起学习，另一方面让一部分人少走弯路，快速上路（入坑）。
+From：[Github](https://github.com/spytensor/prepare_detection_dataset)
 
-此部分代码：[Github](https://github.com/spytensor/prepare_detection_dataset)
-博客地址: [目标检测系列一：如何制作数据集?](http://www.spytensor.com/index.php/archives/48/)
-
-
-**更新**
+**Newly upload**
 
 - (28/03/2019)
-    - 新增 `csv2labelme`
+    - Release: `csv2labelme`
 
 
-<h4 id="1">1. 内容介绍</h4>
+<h4 id="1">1. Intro</h4>
 
-系列一主要介绍如何在常见的几种数据格式之间进行转换，以及万能中介`csv`格式的使用，这里列出以下几个：
+Convert between several common data formats;
+The use of the universal intermediary `csv` format:
 
 - csv to coco
 - csv to voc
@@ -22,15 +19,14 @@
 - labelme to voc
 - csv to json
 
-<h4 id="2">2. 标准格式</h4>
+<h4 id="2">2. Standard formats</h4>
 
-在使用转换脚本之前，必须要明确的几种格式
+Before using the conversion script, clarify:
 
 <h5 id="2.1">2.1 csv</h5>
 
-不要一看是`csv`文件就直接拿来运行，如果不是，可以自行修改代码，或者修改标注文件。
-
-转换脚本支持的csv格式应为以下形式:
+You'd better try to modify the codes or labels first, rather than running the scripts directly.
+The csv format should be:
 
 - `csv/`
     - `labels.csv`
@@ -39,22 +35,22 @@
         - `image2.jpg`
         - `...`
 
-`labels.csv` 的形式: 
+`labels.csv`  look: 
 
 `/path/to/image,xmin,ymin,xmax,ymax,label`
 
-例如:
+For example:
 
 ```
 /mfs/dataset/face/0d4c5e4f-fc3c-4d5a-906c-105.jpg,450,154,754,341,face
 /mfs/dataset/face/0ddfc5aea-fcdac-421-92dad-144.jpg,143,154,344,341,face
 ...
 ```
-注：图片路径请使用绝对路径
+Note: Please use absolute path for image path
 
 <h5 id="2.2">2.2 voc</h5>
 
-标准的voc数据格式如下：
+The standard voc data format：
 
 - `VOC2007/`
     - `Annotations/`
@@ -74,7 +70,7 @@
 
 <h5 id="2.3">2.3 coco</h5>
 
-此处未使用测试集
+No `test` here.
 
 - `coco/`
     - `annotations/`
@@ -97,7 +93,7 @@
     - `0ddfc5aea-fcdac-421-92dad-144.json`
     - `0ddfc5aea-fcdac-421-92dad-144.jpg`
 
-Json file 格式:
+Json file:
 （imageData那一块太长了，不展示了）
 
 ```json
@@ -141,11 +137,11 @@ Json file 格式:
 }
 ```
 
-<h4 id="3">3. 如何使用转换脚本</h4>
+<h4 id="3">3. How to use scripts</h4>
 
 <h5 id="3.1">3.1 csv2coco</h5>
 
-首先更改`csv2coco.py`中以下几个配置
+First change `csv2coco.py` configures:
 
 ```
 classname_to_id = {"person": 1}  # for your dataset classes
@@ -154,9 +150,9 @@ image_dir = "images/"    # original image path
 saved_coco_path = "./"   # path to save converted coco dataset
 ```
 
-然后运行 `python csv2coco.py`
+Run `python csv2coco.py`
 
-会自动创建文件夹并复制图片到相应位置，运行结束后得到如下：
+It will automatically create a folder and copy the image to the corresponding location, and after running, you will get the following：
 
 - `coco/`
     - `annotations/`
@@ -172,7 +168,7 @@ saved_coco_path = "./"   # path to save converted coco dataset
 
 <h5 id="3.2">3.2 csv2voc</h5>
 
-首先更改`csv2voc.py`中以下几个配置
+First change `csv2voc.py` configures:
 
 ```
 csv_file = "labels.csv"
@@ -181,9 +177,9 @@ image_save_path = "./JPEGImages/"   # converted voc images path
 image_raw_parh = "images/"          # original image path
 ```
 
-然后运行 `python csv2voc.py`
+Run `python csv2voc.py`
 
-同样会自动创建文件夹并复制图片到相应位置，运行结束后得到如下：
+Also create a folder and copy, get the following：
 
 
 - `VOC2007/`
@@ -204,40 +200,40 @@ image_raw_parh = "images/"          # original image path
 
 <h5 id="3.3">3.3 labelme2coco</h5>
 
-首先更改`labelme2coco.py`中以下几个配置
+First change `labelme2coco.py` configures:
 
 ```
 classname_to_id = {"person": 1}  # for your dataset classes
 labelme_path = "labelme/"  # path for labelme dataset
 saved_coco_path = "./"     # path for saved coco dataset
 ```
-然后运行 `python labelme2coco.py`，生成文件形式同`csv2coco`
+Run `python labelme2coco.py`，output file is like`csv2coco`
 
 <h5 id="3.4">3.4 labelme2voc</h5>
 
-首先更改`labelme2voc.py`中以下几个配置
+First change `labelme2voc.py` configures:
 
 ```
 labelme_path = "labelme/"  # path for labelme dataset
 saved_coco_path = "./"     # path for saved coco dataset
 ```
-然后运行 `python labelme2voc.py`，生成文件形式同`csv2voc`
+Run `python labelme2voc.py`，output file is like `csv2voc`
 
 <h5 id="3.5">3.5 csv2labelme</h5>
 
-首先更改`csv2labelme.py`中以下几个配置
+First change `csv2labelme.py` configures:
 
 ```
 image_path = "./images/"  # path for images
 csv_file = "./"     # path for csv annotations
 ```
-然后运行 `python csv2labelme.py`，生成的`json`文件会保存在`image_path`下,切换路径过去,直接`labelme`便
-可以查看标签.
+Run `python csv2labelme.py`，output `json` will be saved at `image_path`,switch the path and directly to `labelme` to check the labels.
 
 
-<h4 id="4">4. 万能中介csv</h4>
+<h4 id="4">4. Universal medium csv</h4>
 
-从上面的转换格式中可以看出，并没有给出如何转到csv的，一是因为太过于简单，而是主流检测框架很少支持这种格式的数据输入。以下给出如何将标注信息写入`csv`
+Mainstream detection frameworks rarely support this format of data input(No information is given on how to transfer to .csv -------not because it's simple).
+Here is how to write the annotation information to `csv`
 
 ```python
 info = [[filename0,"xmin ymin xmax ymax label0"],
@@ -250,11 +246,9 @@ for filename,bboxes in info:
 csv_labels.close()
 ```
 
-是不是非常简单。。。如果你不知道如何从原始的标签文件中读取得到标注信息，那没办法了，学学编程吧，23333
+PS:How to read from the original label file to get the label information
 
 ### TODO
 - 1. [ ] Multiprocessing
-## 致谢
-感谢这么久以来对本项目支持的各位大佬！
 
 [![Stargazers repo roster for @spytensor/prepare_detection_dataset](https://reporoster.com/stars/spytensor/prepare_detection_dataset)](https://github.com/spytensor/prepare_detection_dataset/stargazers)
