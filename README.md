@@ -25,7 +25,8 @@ json2mask
 
 prepare_detection_dataset-master
 ----
-
+Personal use.
+from: https://github.com/spytensor/prepare_detection_dataset
 
 segmentation-format-fix-main
 ----
