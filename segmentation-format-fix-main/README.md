@@ -1,7 +1,9 @@
 ## Segmentation Format Fix
 
+Personal use.
+From: https://github.com/bubbliiiing/segmentation-format-fix.
 Tools to adapt the format of the dataset for the semantic segmentation algorithm to the training requirements.
----
+--
 
 ## Raw Image Processing
 When the input original image suffix is not `.jpg`, it cannot be trained properly, you can use `Convert_JPEGImages.py` to modify the original image suffix in batch.
