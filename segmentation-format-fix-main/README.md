@@ -1,22 +1,21 @@
-## Segmentation Format Fix-该仓库中放置了一些工具，用于调整语义分割算法的数据集格式，使其符合训练要求。
+## Segmentation Format Fix
+
+Tools to adapt the format of the dataset for the semantic segmentation algorithm to the training requirements.
 ---
 
-## 目录
-1. [原图处理](#原图处理)
-2. [标签处理](#标签处理)
+## Raw Image Processing
+When the input original image suffix is not `.jpg`, it cannot be trained properly, you can use `Convert_JPEGImages.py` to modify the original image suffix in batch.
+### Steps
+1、Origin_JPEGImages_path: specify the images need to be modified with a suffix；    
+2、Out_JPEGImages_path: specify the output path；    
+3、Modify and run, batch process the original image, process it as an RGB image and change the suffix to `.jpg`.   
 
-## 原图处理
-在本人提供的一些语义分割仓库中，当输入的原图后缀不为.jpg时无法正常训练，可使用Convert_JPEGImages.py进行原图后缀批量修改。
-### 修改步骤
-1、Origin_JPEGImages_path用于指定需要修改后缀的图片汇总；    
-2、Out_JPEGImages_path用于指定输出的图片路径；    
-3、修改后运行，批量处理原图，处理为RGB图并将后缀改为.jpg。   
-
-## 标签处理
-在本人提供的一些语义分割仓库中，标签的每个像素点的值就是这个像素点所属的种类，如果不符合的话则会没有训练效果。可使用Convert_SegmentationClass.py进行标签批量修改。
-### 修改步骤
-1、Origin_SegmentationClass_path用于指定需要修改的标签汇总；   
-2、Out_SegmentationClass_pathh用于指定输出的标签路径；   
-3、Origin_Point_Value用于指定原始标签所在的路径；   
-4、Out_Point_Value用于指定输出标签对应的像素点值；   
-5、修改后运行，批量处理标签，处理为png灰度图。  
+## Label Processing
+The value of each pixel of the label is the kind to which the pixel belongs, and if it does not match then there will be no training effect.
+Use `Convert_SegmentationClass.py` to modify the labels batchly.
+### Steps
+1、Origin_SegmentationClass_path: specify the labels need to be modified；   
+2、Out_SegmentationClass_path: specify the output path；   
+3、Origin_Point_Value: specify the original path；   
+4、Out_Point_Value: specify the pixel point value corresponding to the output labels；   
+5、Modify and run, batch process the labels, process it as an GRAY image and change the suffix to `.png`.
