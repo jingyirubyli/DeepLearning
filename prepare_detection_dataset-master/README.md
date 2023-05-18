@@ -94,7 +94,6 @@ No `test` here.
     - `0ddfc5aea-fcdac-421-92dad-144.jpg`
 
 Json file:
-（imageData那一块太长了，不展示了）
 
 ```json
 {
@@ -250,5 +249,3 @@ PS:How to read from the original label file to get the label information
 
 ### TODO
 - 1. [ ] Multiprocessing
-
-[![Stargazers repo roster for @spytensor/prepare_detection_dataset](https://reporoster.com/stars/spytensor/prepare_detection_dataset)](https://github.com/spytensor/prepare_detection_dataset/stargazers)
