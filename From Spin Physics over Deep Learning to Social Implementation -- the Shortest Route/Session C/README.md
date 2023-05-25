@@ -17,7 +17,9 @@ References:
 [PyTorch: Deep learning framework with Python]
 
 https://pytorch.org
+
 https://pytorch.org/tutorials/beginner/basics/intro.html
+
 https://pytorch.org/tutorials/beginner/introyt.html
 
 
